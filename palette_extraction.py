@@ -13,7 +13,7 @@ def load_image(path):
    x_unique = np.unique(x.reshape(-1, 3), axis = 0) #to store the unique pixels
    return image, x, x_unique, img_shape
 
-def get_palette(img, palette_size):
+def get_palette(img_unique, palette_size):
     kmn = KMeans(n_clusters = palette_size, n_init = 10)
     kmn.fit(img_unique)
     palette = kmn.cluster_centers_.round().astype(np.uint8)
