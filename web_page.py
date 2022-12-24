@@ -1,15 +1,30 @@
-#this will be the web app built with streamlit
-import streamlit as st
+#The web app interface
 from PIL import Image
-import time
+from io import BytesIO
+import streamlit as st
+import palette_extraction as pe
 
-st.write("This is the sample text to be displayed")
+def to_bytes(image):
+	buf = BytesIO()
+	image.save(buf, format = "PNG")
+	return buf.getvalue()
 
-status_bar = st.progress(0)
-latest_iteration = st.empty()
-for i in range(100):
-	latest_iteration.text(f'Progress bar {i}')
-	bar.progress(i+1)
-	timesleep(0.1)
+st.set_page_config(layout="wide", page_title="Hue - A Palette Extractor")
+st.write("## Generate a palette from your image")
 
-st.write(Image.open("palette.png"))
+upload = st.sidebar.file_uploader("Upload an image", type = ["png", "jpg", "jpeg"])
+
+if upload is None:
+	uploaded_image = Image.open("sample_image.jpg")
+else:
+	uploaded_image = Image.open(upload)
+
+col1, col2 = st.columns(2)
+
+col1.write("Uploaded image: ")
+col1.image(uploaded_image)
+
+palette = pe.generate_palette(uploaded_image, 8)
+col2.write("Generated palette: ")
+col2.image(palette)
+col2.download_button("Download palette", to_bytes(palette), file_name = "palette.png")
