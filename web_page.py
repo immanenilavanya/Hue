@@ -3,6 +3,7 @@ from PIL import Image
 from io import BytesIO
 import streamlit as st
 import palette_extraction as pe
+import image_concatenation as ic
 
 @st.cache
 def to_bytes(image):
@@ -30,3 +31,4 @@ palette = pe.generate_palette(uploaded_image, palette_size)
 col2.write("Generated palette: ")
 col2.image(palette)
 col2.download_button("Download palette", to_bytes(palette), file_name = "palette.png")
+col2.download_button("Download image with palette", to_bytes(ic.concat(uploaded_image, palette), file_name = "combined.png")
