@@ -4,6 +4,7 @@ from io import BytesIO
 import streamlit as st
 import palette_extraction as pe
 
+@st.cache
 def to_bytes(image):
 	buf = BytesIO()
 	image.save(buf, format = "PNG")
@@ -23,8 +24,9 @@ col1, col2 = st.columns(2)
 
 col1.write("Uploaded image: ")
 col1.image(uploaded_image)
+palette_size = col1.slider("Number of colours in the palette", min_value = 1, max_value = 10, value = 8, step = 1)
 
-palette = pe.generate_palette(uploaded_image, 8)
+palette = pe.generate_palette(uploaded_image, palette_size)
 col2.write("Generated palette: ")
 col2.image(palette)
 col2.download_button("Download palette", to_bytes(palette), file_name = "palette.png")
