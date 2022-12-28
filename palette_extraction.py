@@ -1,13 +1,16 @@
 import numpy as np
 from PIL import Image
+import streamlit as st
 from sklearn.cluster import KMeans
 
+@st.cache
 def load_image(image):
     image = image.convert('RGB')
     temp = np.array(image).reshape(-1, 3)
     img_unique = np.unique(temp.reshape(-1, 3), axis = 0)
     return img_unique
 
+@st.cache
 def get_palette(img_unique, palette_size):
     kmn = KMeans(n_clusters = palette_size, n_init = 10)
     kmn.fit(img_unique)
