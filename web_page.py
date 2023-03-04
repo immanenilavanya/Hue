@@ -28,10 +28,14 @@ col1.write("Uploaded image: ")
 col1.image(uploaded_image)
 
 palette_size = col1.slider("Number of colours in the palette", min_value = 1, max_value = 10, value = 8, step = 1)
-palette = pe.generate_palette(uploaded_image, palette_size)
+palette_img, palette_hex = pe.generate_palette(uploaded_image, palette_size)
 col2.write("Generated palette: ")
-col2.image(palette)
+col2.image(palette_img)
 
-col2.download_button("Download palette", to_bytes(palette), file_name = "palette.png")
+col2.download_button("Download palette", to_bytes(palette_img), file_name = "palette.png")
 
-st.sidebar.download_button("Download image with palette", to_bytes(ic.concat(uploaded_image, palette)), file_name = "combined.png")
+st.sidebar.download_button("Download image with palette", to_bytes(ic.concat(uploaded_image, palette_img)), file_name = "combined.png")
+
+st.write("The hex values are: ")
+for val in palette_hex:
+	st.write(val)
