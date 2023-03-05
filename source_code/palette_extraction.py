@@ -24,5 +24,5 @@ def get_palette(img_unique, palette_size):
 
 def generate_palette(image, palette_size = 8):
     img_unique = load_image(image)
-    palette = get_palette(img_unique, palette_size)
-    return palette
+    palettes = get_palette(img_unique, palette_size)
+    return palettes
