@@ -14,6 +14,15 @@ PORT = 8080
 @stream
 async def handle_request(request):
     try:
+        await response.file_stream(
+        "../source/sample_image.jpg",
+        chunk_size=1024,
+        mime_type="application/metalink4+xml",
+        headers={
+            "Content-Disposition": 'Attachment; filename="image.jpg"',
+            "Content-Type": "application/metalink4+xml",
+                },
+        )
         result = ""
         while True:
             body = await request.stream.read()
