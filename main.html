@@ -1,47 +1,68 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-    <head> 
-        <title>hue</title>
-        <link rel = "stylesheet" href = "style.css">
-        <script type="text/javascript">
-            function button(){
-                document.getElementById('sidebar').classList.toggle('active');
-            }
-        </script>
-    </head>
-    <body>
-        
-        <div id = "sidebar" onclick = "button()">
-            <div class = "button" href="#">
-                <span></span>
-                <span></span>
-                <span></span>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+<script type="text/javascript">
+    function button(){
+        document.getElementById('sidebar').classList.toggle('active');
+    }
+</script>
+</head>
+<body>
+
+<div class="row">
+  <div class="column left" style="background-color:#000000;">
+    <div id = "sidebar" onclick = "button()">
+        <div class = "button" href="#">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="content">
+            <h3>Upload an image</h3>
+            <div class = "upload-box">
+                <h4>Drag and drop file here</h4>
+                <p>Limit 200MB per file.PNG,JPG,JPEG</p>
+                <div>
+                    <button type="file" class="browse" onchange="readURL(this)" accept = "Image/*">Browse file</button>
+                </div>
+                
             </div>
-            <div class="content">
-                <h3>Upload an image</h3>
-                <div class = "upload-box">
-                    <h4>Drag and drop file here</h4>
-                    <p>Limit 200MB per file.PNG,JPG,JPEG</p>
-                    <div>
-                        <button type="file" class="browse" onchange="readURL(this)" accept = "Image/*">Browse file</button>
-                    </div>
-                    
-                </div>
-                <div href="www.svecw.edu.in" class = "download-image">
-                    <button id = "download">Download image with palette</button>
-                </div>
+            <div href="#" class = "download-image">
+                <button id = "download">Download image with palette</button>
             </div>
         </div>
-        <div id = "main">
-            <h1>Generate a platform from your image</h1>
-            <div class="image">
-                <p>uploaded image:</p>
-                <img src="#">
-            </div>
-            <div class="palette">
-                <p>Generated palette:</p>
-            </div>
-        </div>
+    </div>
+  </div>
+  <div class="column right" style="background-color:#000000;">
+    <h1>Generate a platform from your image</h1>
     
-    </body>
-</html> 
+    <p>Uploaded image:
+            <br><br><div>
+                <img style="width:400px;height:220px" src="#">
+               </div></p>   
+    <p>Generated palette:</p>
+    <div class="images">
+    <img class="a" style="height:50px;width:50px"src="D:\ASRITA\Pictures\My Pictures\i.jpg" alt="">
+    <img style="height:50px;width:50px"src="D:\ASRITA\Pictures\My Pictures\i.jpg" alt="">
+    <img style="height:50px;width:50px"src="D:\ASRITA\Pictures\My Pictures\i.jpg" alt="">
+    <img style="height:50px;width:50px"src="D:\ASRITA\Pictures\My Pictures\i.jpg" alt="">
+    <img style="height:50px;width:50px"src="D:\ASRITA\Pictures\My Pictures\i.jpg" alt="">
+    <img class="f" style="height:50px;width:50px"src="#" alt="">
+    <img style="height:50px;width:50px"src="#" alt="">
+    <img style="height:50px;width:50px"src="#" alt="">
+    <img style="height:50px;width:50px"src="#" alt="">
+    <img style="height:50px;width:50px"src="#" alt="">
+    </div>
+    <button class="download2">Download palette</button>
+    
+        
+       
+       
+          
+  </div>
+</div>
+
+</body>
+</html>
