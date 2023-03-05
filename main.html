@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+    <head> 
+        <title>hue</title>
+        <link rel = "stylesheet" href = "style.css">
+        <script type="text/javascript">
+            function button(){
+                document.getElementById('sidebar').classList.toggle('active');
+            }
+        </script>
+    </head>
+    <body>
+        
+        <div id = "sidebar" onclick = "button()">
+            <div class = "button" href="#">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="content">
+                <h3>Upload an image</h3>
+                <div class = "upload-box">
+                    <h4>Drag and drop file here</h4>
+                    <p>Limit 200MB per file.PNG,JPG,JPEG</p>
+                    <div>
+                        <button type="file" class="browse" onchange="readURL(this)" accept = "Image/*">Browse file</button>
+                    </div>
+                    
+                </div>
+                <div href="www.svecw.edu.in" class = "download-image">
+                    <button id = "download">Download image with palette</button>
+                </div>
+            </div>
+        </div>
+        <div id = "main">
+            <h1>Generate a platform from your image</h1>
+            <div class="image">
+                <p>uploaded image:</p>
+                <img src="#">
+            </div>
+            <div class="palette">
+                <p>Generated palette:</p>
+            </div>
+        </div>
+    
+    </body>
+</html> 
