@@ -1,37 +1,35 @@
 import base64
+from io import BytesIO
 from PIL import Image
-from sanic import Sanic, json
-from sanic.views import stream
-from sanic import response, text
+from sanic import Sanic, response, text
+from sanic.exceptions import SanicException
 import palette_extraction as pe
-import request_send as req_s
 
 app = Sanic("Hue")
 HOST = "localhost"
 PORT = 8080
 
-@app.route('/file')
-@stream
+@app.route('/file', methods=['POST'])
 async def handle_request(request):
     try:
-        await response.file_stream(
-        "../source/sample_image.jpg",
-        chunk_size=1024,
-        mime_type="application/metalink4+xml",
-        headers={
-            "Content-Disposition": 'Attachment; filename="image.jpg"',
-            "Content-Type": "application/metalink4+xml",
-                },
-        )
-        result = ""
-        while True:
-            body = await request.stream.read()
-            if body is None:
-                break
-            result += body
-        return text(body)
-    except:
-        return json({"upload" : "failed"}, status = 400)
+        uploaded_file = request.files.get('file')
+        if not uploaded_file:
+            raise SanicException("No file uploaded")
 
-if __name__ == "__main__":
+        # Get the file contents as bytes
+        file_contents = uploaded_file.body
+
+        # Process the file (for example, extract a color palette)
+        image = Image.open(BytesIO(file_contents))
+        palette = pe.extract_palette(image)
+
+        # Return a response with the palette as JSON
+        return response.json({'palette': palette})
+        
+    except SanicException as e:
+        return text(str(e), status=400)
+    except Exception as e:
+        return text("Server error", status=500)
+
+if __name__ == "_main_":
     app.run(host=HOST, port=PORT, debug=True)
